@@ -19,38 +19,6 @@ enum custom_keycodes {
     FN_TURBO_MOUSE
 };
 
-// Custom  Overrides
-/* cons key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC,KC_DEL);
-
-const key_override_t **key_overrides = (const key_override_t *[]){
-    &delete_key_override,
-    NULL
-}; */
-
-// Tap Dance
-// enum td_keycodes {
-//     TD_SHIFT_CAPS
-// };
-
-// typedef enum {
-//     TD_NONE,
-//     TD_UNKNOWN,
-//     TD_SINGLE_TAP,
-//     TD_SINGLE_HOLD,
-//     TD_DOUBLE_SINGLE_TAP
-// } td_state_t;
-
-// static td_state_t td_state;
-// td_state_t cur_dance(qk_tap_dance_state_t *state);
-// td_state_t cur_dance_hold(qk_tap_dance_state_t *state);
-
-// void shiftcaps_finished(qk_tap_dance_state_t *state, void *user_data);
-// void shiftcaps_reset(qk_tap_dance_state_t *state, void *user_data);
-
-// qk_tap_dance_action_t tap_dance_actions[] = {
-//     [TD_SHIFT_CAPS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, shiftcaps_finished, shiftcaps_reset)
-// };
-
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -108,62 +76,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
-
-
-// td_state_t cur_dance_hold(qk_tap_dance_state_t *state) {
-//     if (state->count == 1) {
-//         if (!state->pressed) return TD_SINGLE_TAP;
-//         else return TD_SINGLE_HOLD;
-//     }
-
-//     if (state->count == 2) return TD_DOUBLE_SINGLE_TAP;
-//     else return TD_UNKNOWN;
-// }
-
-// td_state_t cur_dance(qk_tap_dance_state_t *state) {
-//     if (state->count == 1) {
-//         if (state->interrupted || !state->pressed) return TD_SINGLE_TAP;
-//         else return TD_SINGLE_HOLD;
-//     }
-
-//     if (state->count == 2) return TD_DOUBLE_SINGLE_TAP;
-//     else return TD_UNKNOWN;
-// }
-
-// Handle the possible states for each tapdance keycode you define:
-// void shiftcaps_finished(qk_tap_dance_state_t *state, void *user_data) {
-//     td_state = cur_dance(state);
-//     switch (td_state) {
-//         case TD_SINGLE_TAP:
-//             register_mods(MOD_BIT(KC_LSHIFT));
-//             break;
-//         case TD_SINGLE_HOLD:
-//             register_mods(MOD_BIT(KC_LSHIFT));
-//             break;
-//         case TD_DOUBLE_SINGLE_TAP:
-//             register_code16(KC_CAPS);
-//             break;
-//         default:
-//             break;
-//     }
-// }
-// void shiftcaps_reset(qk_tap_dance_state_t *state, void *user_data) {
-//     td_state = cur_dance(state);
-//     switch (td_state) {
-//         case TD_SINGLE_TAP:
-//             break;
-//         case TD_SINGLE_HOLD:
-//             unregister_mods(MOD_BIT(KC_LSHIFT));
-//             break;
-//         case TD_DOUBLE_SINGLE_TAP:
-//             unregister_code16(KC_CAPS);
-//             break;
-//         default:
-//             break;
-//     }
-// }
-
-
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [_QWERTY] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
@@ -173,47 +85,6 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [_NUMPAD] = { ENCODER_CCW_CW(RGB_HUD, RGB_HUI) }
 };
 #endif
-
-// // Handle the rotary encoder functions:
-// #ifdef ENCODER_ENABLE
-// bool encoder_update_user(uint8_t index, bool clockwise) {
-//     uint8_t temp_mod = get_mods();
-//     uint8_t temp_osm = get_oneshot_mods();
-//     bool    is_ctrl  = (temp_mod | temp_osm) & MOD_MASK_CTRL;
-
-//     if (is_ctrl) {
-//         if (index == 0) {
-//             clear_mods();
-//             if (clockwise) {
-//                 tap_code16(C(S(KC_Z)));
-//             } else {
-//                 tap_code16(C(KC_Z));
-//             }
-//             set_mods(temp_mod);
-//         }
-//     }
-
-//     else if (biton32(layer_state) == _EXTRAS) {
-//         if (index == 0) {
-//             if (clockwise) {
-//                 rgblight_increase_hue();
-//             } else {
-//                 rgblight_decrease_hue();
-//             }
-//         }
-//     }
-//     else {
-//         if (index == 0) {
-//             if (clockwise) {
-//                 tap_code(KC_VOLU);
-//             } else {
-//                 tap_code(KC_VOLD);
-//             }
-//         }
-//     }
-//     return true;
-// }
-// #endif // ENCODER_ENABLE
 
 // uint8_t mod_state;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
