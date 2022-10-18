@@ -16,6 +16,7 @@ enum custom_keycodes {
     FN_CT = SAFE_RANGE,
     FN_CST,
     FN_CW,
+    FN_CZ,
     FN_LLOCK,
     FN_TURBO_MOUSE,
     FN_SLACK,
@@ -64,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL,           _______,
     MO(_NUMPAD), KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_ENT,  _______, _______, _______,          _______,
-        _______, _______, FN_CW, FN_CST, FN_CT,      _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______, _______,                   _______,
+        _______, FN_CZ,   FN_CW,   FN_CST,  FN_CT,   _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______, _______,                   _______,
         _______, _______, _______, _______, _______, _______, _______, KC_MINS, KC_EQL,  _______, KC_DEL,                    _______, _______, _______,
         _______, _______, _______,                            _______,                           FN_LLOCK, _______, _______, _______, _______, _______
     ),
@@ -109,6 +110,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case FN_CW:
             if (record->event.pressed) {
                 tap_code16(C(KC_W));
+            }
+            break;
+        case FN_CZ:
+            if (record->event.pressed) {
+                tap_code16(C(KC_Z));
             }
             break;
         case FN_WHATSAPP:
