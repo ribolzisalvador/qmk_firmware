@@ -15,6 +15,7 @@ enum custom_layers {
 enum custom_keycodes {
     FN_CT = SAFE_RANGE,
     FN_CST,
+    FN_CW,
     FN_LLOCK,
     FN_TURBO_MOUSE,
     FN_SLACK,
@@ -51,9 +52,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_FN] = LAYOUT(
-        _______, KC_MYCM, KC_WHOM, KC_MSEL, KC_CALC, FN_WHATSAPP, FN_STEAM, FN_SLACK, _______, _______, _______, _______, _______, _______,          _______,
+        _______, KC_MYCM, KC_WHOM, KC_MSEL, KC_CALC, FN_WHATSAPP, FN_STEAM, FN_SLACK, _______, _______, _______, _______, _______, _______,    _______,
         _______, RGB_TOG, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
-        _______, _______, RGB_VAI, _______, _______, _______, _______, _______, _______, _______, _______, DF(_QWERTY), DF(_COLEMAKDH), RESET,   _______,
+        _______, _______, RGB_VAI, _______, _______, _______, _______, _______, _______, _______, _______, DF(_QWERTY), DF(_COLEMAKDH), RESET, _______,
         _______, _______, RGB_VAD, _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______,          FN_TURBO_MOUSE,   _______,
       CAPS_WORD, _______, _______, _______, _______, _______, NK_TOGG, _______, _______, _______, _______,                   KC_CAPS, RGB_MOD, _______,
         _______, _______, _______,                            _______,                            _______, _______, _______, RGB_SPD, RGB_RMOD, RGB_SPI
@@ -62,8 +63,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_EXTRAS] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL,           _______,
-    MO(_NUMPAD), _______, _______, _______, _______, _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_ENT,  _______, _______, _______,          _______,
-        _______, _______, _______, FN_CST, FN_CT,    _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______, _______,                   _______,
+    MO(_NUMPAD), KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_ENT,  _______, _______, _______,          _______,
+        _______, _______, FN_CW, FN_CST, FN_CT,      _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______, _______,                   _______,
         _______, _______, _______, _______, _______, _______, _______, KC_MINS, KC_EQL,  _______, KC_DEL,                    _______, _______, _______,
         _______, _______, _______,                            _______,                           FN_LLOCK, _______, _______, _______, _______, _______
     ),
@@ -81,11 +82,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
-    [_QWERTY] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [_QWERTY]    = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [_COLEMAKDH] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [_FN]     = { ENCODER_CCW_CW(RGB_HUD, RGB_HUI) },
-    [_EXTRAS] = { ENCODER_CCW_CW(RGB_HUD, RGB_HUI) },
-    [_NUMPAD] = { ENCODER_CCW_CW(RGB_HUD, RGB_HUI) }
+    [_FN]        = { ENCODER_CCW_CW(RGB_HUD, RGB_HUI) },
+    [_EXTRAS]    = { ENCODER_CCW_CW(RGB_HUD, RGB_HUI) },
+    [_NUMPAD]    = { ENCODER_CCW_CW(RGB_HUD, RGB_HUI) }
 };
 #endif
 
@@ -103,6 +104,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case FN_CST:
             if (record->event.pressed) {
                 tap_code16(C(S(KC_TAB)));
+            }
+            break;
+        case FN_CW:
+            if (record->event.pressed) {
+                tap_code16(C(KC_W));
             }
             break;
         case FN_WHATSAPP:
