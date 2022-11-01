@@ -13,10 +13,11 @@ enum custom_layers {
 
 // Custom Keycodes
 enum custom_keycodes {
-    FN_CT = SAFE_RANGE,
-    FN_CST,
-    FN_CW,
-    FN_CZ,
+    CTRL_TAB = SAFE_RANGE,
+    CTRL_S_TAB,
+    CTRL_W,
+    CTRL_Z,
+    CTRL_S_T,
     FN_LLOCK,
     FN_TURBO_MOUSE,
     FN_SLACK,
@@ -65,8 +66,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL,           _______,
     MO(_NUMPAD), KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_ENT,  _______, _______, _______,          _______,
-        _______, FN_CZ,   FN_CW,   FN_CST,  FN_CT,   _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______, _______,                   _______,
-        _______, _______, _______, _______, _______, _______, _______, KC_MINS, KC_EQL,  _______, KC_DEL,                    _______, _______, _______,
+        _______, CTRL_Z,  CTRL_W,  CTRL_S_TAB, CTRL_TAB,   _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______, _______,                   _______,
+        _______, _______, _______, CTRL_S_T, _______, _______, _______, KC_MINS, KC_EQL,  _______, KC_DEL,                    _______, _______, _______,
         _______, _______, _______,                            _______,                           FN_LLOCK, _______, _______, _______, _______, _______
     ),
 
@@ -75,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, _______, _______, _______, _______, KC_PMNS, KC_KP_7, KC_KP_8, KC_KP_9, KC_PAST, _______, _______, _______,          _______,
         _______, _______, _______, _______, _______, _______, KC_PPLS, KC_KP_4, KC_KP_5, KC_KP_6, KC_PSLS, _______, KC_PENT,                   _______,
-        _______, _______, _______, _______, _______, KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3, KC_PDOT, _______,                   _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3, KC_PDOT,                    _______, _______, _______,
         _______, _______, _______,                            _______,                           FN_LLOCK, _______, _______, _______, _______, _______
     ),
 };
@@ -97,26 +98,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_mouse_turbo_click(keycode, record, FN_TURBO_MOUSE)) { return false; }
 
     switch (keycode) {
-        case FN_CT:
+        case CTRL_TAB:
             if (record->event.pressed) {
                 tap_code16(C(KC_TAB));
             }
            break;
-        case FN_CST:
+        case CTRL_S_TAB:
             if (record->event.pressed) {
                 tap_code16(C(S(KC_TAB)));
             }
             break;
-        case FN_CW:
+
+        case CTRL_S_T:
+            if (record->event.pressed) {
+                tap_code16(C(S(KC_T)));
+            }
+            break;
+        case CTRL_W:
             if (record->event.pressed) {
                 tap_code16(C(KC_W));
             }
             break;
-        case FN_CZ:
+        case CTRL_Z:
             if (record->event.pressed) {
                 tap_code16(C(KC_Z));
             }
             break;
+
         case FN_WHATSAPP:
             if (record->event.pressed) {
                 SEND_STRING(SS_TAP(X_LGUI) SS_DELAY(100) "whatsapp" SS_DELAY(100) SS_TAP(X_ENT));
