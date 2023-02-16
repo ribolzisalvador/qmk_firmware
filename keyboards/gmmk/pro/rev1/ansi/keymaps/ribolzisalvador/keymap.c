@@ -21,8 +21,9 @@ enum custom_keycodes {
     FN_LLOCK,
     FN_TURBO_MOUSE,
     FN_SLACK,
-    FN_WHATSAPP,
-    FN_STEAM
+    FN_VSCODE,
+    FN_STEAM,
+    FN_TELEGRAM
 };
 
 // clang-format off
@@ -54,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_FN] = LAYOUT(
-        _______, KC_MYCM, KC_WHOM, KC_MSEL, KC_CALC, FN_WHATSAPP, FN_STEAM, FN_SLACK, _______, _______, _______, _______, _______, _______,    _______,
+        _______, KC_MYCM, KC_WHOM, KC_MSEL, KC_CALC, FN_TELEGRAM, FN_SLACK, FN_STEAM, FN_VSCODE, _______, _______, _______, _______, _______,          _______,
         _______, RGB_TOG, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, RGB_VAI, _______, _______, _______, _______, _______, _______, _______, _______, DF(_QWERTY), DF(_COLEMAKDH), RESET, _______,
         _______, _______, RGB_VAD, _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______,          FN_TURBO_MOUSE,   _______,
@@ -65,9 +66,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_EXTRAS] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,           _______,
     MO(_NUMPAD), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL,            _______,
-        _______, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _______, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_ENT,  _______, _______, _______,           _______,
+        _______, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, KC_ENT, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_ENT,  _______, _______, _______,           _______,
         _______, CTRL_Z, CTRL_W, CTRL_S_TAB, CTRL_TAB, _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______, _______,                  _______,
-        _______, _______, _______, CTRL_S_T, _______, _______, _______, KC_MINS, KC_EQL,  _______, KC_DEL,                    _______, _______, _______,
+        _______, _______, KC_ESC , CTRL_S_T, _______, _______, _______, KC_MINS, KC_EQL,  _______, KC_DEL,                    _______, _______, _______,
         _______, _______, _______,                            _______,                           FN_LLOCK, _______, _______, _______, _______,  _______
     ),
 
@@ -125,9 +126,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 
-        case FN_WHATSAPP:
+        case FN_VSCODE:
             if (record->event.pressed) {
-                SEND_STRING(SS_TAP(X_LGUI) SS_DELAY(100) "whatsapp" SS_DELAY(100) SS_TAP(X_ENT));
+                SEND_STRING(SS_TAP(X_LGUI) SS_DELAY(100) "VSCODE" SS_DELAY(100) SS_TAP(X_ENT));
             }
             break;
         case FN_SLACK:
@@ -140,6 +141,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING(SS_TAP(X_LGUI) SS_DELAY(100) "steam" SS_DELAY(100) SS_TAP(X_ENT));
             }
             break;
+        case FN_TELEGRAM:
+            if (record->event.pressed) {
+                SEND_STRING(SS_TAP(X_LGUI) SS_DELAY(100) "telegram" SS_DELAY(100) SS_TAP(X_ENT));
+            }
+            break;
     }
     return true;
 };
+
+// que onda perritoooooooo, tremendo este tecladitoo
