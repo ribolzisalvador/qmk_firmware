@@ -18,6 +18,7 @@ enum custom_keycodes {
     CTRL_W,
     CTRL_Z,
     CTRL_S_T,
+    CTRL_A_DEL,
     REDDIT_S,
     FN_LLOCK,
     FN_TURBO_MOUSE,
@@ -69,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     MO(_NUMPAD), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL,            _______,
         _______, KC_LGUI, KC_LALT, KC_LSFT,  KC_LCTL, KC_ENT,   KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_ENT,  _______, _______, _______,         _______,
         _______, CTRL_Z, CTRL_W, CTRL_S_TAB, CTRL_TAB, _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______, _______,                  _______,
-        _______, _______, KC_ESC , CTRL_S_T, _______, _______, _______, KC_MINS, KC_EQL,  _______, KC_DEL,                    _______, _______, _______,
+        _______, CTRL_A_DEL, KC_ESC , CTRL_S_T, _______, _______, _______, KC_MINS, KC_EQL,  _______, KC_DEL,                    _______, _______, _______,
         _______, _______, _______,                            _______,                           FN_LLOCK, _______, _______, _______, _______,  _______
     ),
 
@@ -110,7 +111,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code16(C(S(KC_TAB)));
             }
             break;
-
         case CTRL_S_T:
             if (record->event.pressed) {
                 tap_code16(C(S(KC_T)));
@@ -129,6 +129,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case REDDIT_S:
             if (record->event.pressed) {
                 SEND_STRING("site:reddit.com");
+            }
+            break;
+        case CTRL_A_DEL:
+            if (record->event.pressed) {
+                tap_code16(C(KC_A));
+                tap_code16(KC_DEL);
             }
             break;
         case FN_VSCODE:
