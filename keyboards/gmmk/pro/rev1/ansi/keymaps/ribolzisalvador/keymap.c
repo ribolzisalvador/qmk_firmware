@@ -47,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,          KC_PGUP,
         KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,          KC_ENT,           KC_PGDN,
         KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,                   OSM(MOD_RSFT), KC_UP,   KC_END,
-        MO(_EXTRAS), KC_LGUI, KC_LALT,                            KC_SPC,                         KC_LEAD, MO(_FN), KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
+        MO(_EXTRAS), KC_LGUI, KC_LALT,                            KC_SPC,                         QK_LEAD, MO(_FN), KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
     ),
 
     [_COLEMAKDH] = LAYOUT(
@@ -56,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_LBRC, KC_RBRC, KC_BSLS,          KC_PGUP,
         KC_LCTL, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,          KC_ENT,           KC_PGDN,
         KC_LSFT, KC_X,    KC_C,    KC_V,    KC_B,    KC_Z,    KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH,                   OSM(MOD_RSFT), KC_UP,   KC_END,
-        MO(_EXTRAS), KC_LGUI, KC_LALT,                            KC_SPC,                         KC_LEAD, MO(_FN), KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
+        MO(_EXTRAS), KC_LGUI, KC_LALT,                            KC_SPC,                         QK_LEAD, MO(_FN), KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
     ),
 
     [_FN] = LAYOUT(
@@ -64,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, RGB_TOG, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, RGB_VAI, _______, _______, _______, _______, _______, _______, _______, _______, DF(_QWERTY), DF(_COLEMAKDH), RESET, _______,
         _______, _______, RGB_VAD, _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______,          FN_TURBO_MOUSE,   _______,
-      CAPS_WORD, _______, _______, _______, _______, _______, _______, REDDIT_S, _______, _______, NK_TOGG,                   KC_CAPS, RGB_MOD, _______,
+        CW_TOGG, _______, _______, _______, _______, _______, _______, REDDIT_S, _______, _______, NK_TOGG,                   KC_CAPS, RGB_MOD, _______,
         _______, _______, _______,                            _______,                            _______, _______, _______, RGB_SPD, RGB_RMOD, RGB_SPI
     ),
 
