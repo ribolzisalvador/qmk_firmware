@@ -19,11 +19,12 @@ enum custom_keycodes {
     CTRL_Z,
     CTRL_S_T,
     CTRL_A_DEL,
-    REDDIT_S,
 
+    FN_REDDIT_S,
     FN_RCLICK,
     FN_LLOCK,
     FN_TURBO_MOUSE,
+    FN_N,
 
     SH_SPOTIFY,
     SH_SLACK,
@@ -65,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, RGB_TOG, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, RGB_VAI, _______, _______, _______, _______, _______, _______, _______, _______, DF(_QWERTY), DF(_COLEMAKDH), QK_BOOT, _______,
         _______, _______, RGB_VAD, _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, KC_NUM,           FN_TURBO_MOUSE,   _______,
-        CW_TOGG, _______, _______, _______, _______, _______, _______, REDDIT_S, _______, _______, NK_TOGG,                   KC_CAPS, RGB_MOD, _______,
+        CW_TOGG, _______, _______, _______, _______, _______, _______, FN_REDDIT_S, _______, _______, NK_TOGG,                   KC_CAPS, RGB_MOD, _______,
         _______, AG_LNRM, AG_LSWP,                            _______,                            _______, _______, _______, RGB_SPD, RGB_RMOD, RGB_SPI
     ),
 
@@ -74,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     MO(_NUMPAD), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL,            _______,
         _______, KC_LGUI, KC_LALT, OSM(MOD_LSFT),  KC_LCTL, KC_ENT,   KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_ENT,  _______, _______, _______,         _______,
         _______, CTRL_Z, CTRL_W, CTRL_S_TAB, CTRL_TAB, _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______, _______,                  _______,
-        _______, CTRL_A_DEL, KC_ESC , CTRL_S_T, FN_RCLICK, _______, _______, KC_MINS, KC_EQL,  _______, KC_DEL,                    _______, _______, _______,
+        _______, CTRL_A_DEL, KC_ESC , CTRL_S_T, FN_RCLICK, _______, FN_N, KC_MINS, KC_EQL,  _______, KC_DEL,                    _______, _______, _______,
         _______, _______, _______,                           _______,                           FN_LLOCK, _______, _______, _______, _______,  _______
     ),
 
@@ -130,7 +131,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code16(C(KC_Z));
             }
             break;
-        case REDDIT_S:
+        case FN_REDDIT_S:
             if (record->event.pressed) {
                 SEND_STRING("site:reddit.com");
             }
@@ -144,6 +145,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case FN_RCLICK:
             if (record->event.pressed) {
                 tap_code16(S(KC_F10));
+            }
+            break;
+        case FN_N:
+            if (record->event.pressed) {
+                SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_KP_1) SS_TAP(X_KP_6) SS_TAP(X_KP_4) SS_UP(X_LALT));
             }
             break;
         case SH_SPOTIFY:
