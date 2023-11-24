@@ -25,11 +25,11 @@ enum custom_keycodes {
     FN_LLOCK,
     FN_TURBO_MOUSE,
 
-    FN_SPOTIFY,
-    FN_SLACK,
-    FN_VSCODE,
-    FN_STEAM,
-    FN_TELEGRAM
+    SH_SPOTIFY,
+    SH_SLACK,
+    SH_VSCODE,
+    SH_STEAM,
+    SH_TELEGRAM
 };
 
 // clang-format off
@@ -61,10 +61,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_FN] = LAYOUT(
-        _______, KC_MYCM, KC_WHOM, FN_SPOTIFY, KC_CALC, FN_TELEGRAM, FN_STEAM, FN_SLACK, FN_VSCODE, _______, _______, _______, _______, _______,_______,
+        _______, KC_MYCM, KC_WHOM, SH_SPOTIFY, KC_CALC, SH_TELEGRAM, SH_STEAM, SH_SLACK, SH_VSCODE, _______, _______, _______, _______, _______,_______,
         _______, RGB_TOG, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, RGB_VAI, _______, _______, _______, _______, _______, _______, _______, _______, DF(_QWERTY), DF(_COLEMAKDH), QK_BOOT, _______,
-        _______, _______, RGB_VAD, _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______,          FN_TURBO_MOUSE,   _______,
+        _______, _______, RGB_VAD, _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, KC_NUM,           FN_TURBO_MOUSE,   _______,
         CW_TOGG, _______, _______, _______, _______, _______, _______, REDDIT_S, _______, _______, NK_TOGG,                   KC_CAPS, RGB_MOD, _______,
         _______, AG_LNRM, AG_LSWP,                            _______,                            _______, _______, _______, RGB_SPD, RGB_RMOD, RGB_SPI
     ),
@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, KC_LGUI, KC_LALT, OSM(MOD_LSFT),  KC_LCTL, KC_ENT,   KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_ENT,  _______, _______, _______,         _______,
         _______, CTRL_Z, CTRL_W, CTRL_S_TAB, CTRL_TAB, _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______, _______,                  _______,
         _______, CTRL_A_DEL, KC_ESC , CTRL_S_T, FN_RCLICK, _______, _______, KC_MINS, KC_EQL,  _______, KC_DEL,                    _______, _______, _______,
-        _______, _______, _______,                            _______,                           FN_LLOCK, _______, _______, _______, _______,  _______
+        _______, _______, _______,                           _______,                           FN_LLOCK, _______, _______, _______, _______,  _______
     ),
 
     [_NUMPAD] = LAYOUT(
@@ -146,27 +146,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code16(S(KC_F10));
             }
             break;
-        case FN_SPOTIFY:
+        case SH_SPOTIFY:
             if (record->event.pressed) {
                 SEND_STRING(SS_TAP(X_LGUI) SS_DELAY(100) "SPOTIFY" SS_DELAY(100) SS_TAP(X_ENT));
             }
             break;
-        case FN_VSCODE:
+        case SH_VSCODE:
             if (record->event.pressed) {
                 SEND_STRING(SS_TAP(X_LGUI) SS_DELAY(100) "VSCODE" SS_DELAY(100) SS_TAP(X_ENT));
             }
             break;
-        case FN_SLACK:
+        case SH_SLACK:
             if (record->event.pressed) {
                 SEND_STRING(SS_TAP(X_LGUI) SS_DELAY(100) "slack" SS_DELAY(100) SS_TAP(X_ENT));
             }
             break;
-        case FN_STEAM:
+        case SH_STEAM:
             if (record->event.pressed) {
                 SEND_STRING(SS_TAP(X_LGUI) SS_DELAY(100) "steam" SS_DELAY(100) SS_TAP(X_ENT));
             }
             break;
-        case FN_TELEGRAM:
+        case SH_TELEGRAM:
             if (record->event.pressed) {
                 SEND_STRING(SS_TAP(X_LGUI) SS_DELAY(100) "telegram" SS_DELAY(100) SS_TAP(X_ENT));
             }
