@@ -21,6 +21,7 @@ enum custom_keycodes {
     CTRL_A_DEL,
 
     FN_REDDIT_S,
+    FN_REDDIT_TAB,
     FN_RCLICK,
     FN_LLOCK,
     FN_TURBO_MOUSE,
@@ -30,7 +31,7 @@ enum custom_keycodes {
     SH_SLACK,
     SH_VSCODE,
     SH_STEAM,
-    SH_TELEGRAM
+    SH_QBIT
 };
 
 // clang-format off
@@ -62,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_FN] = LAYOUT(
-        _______, KC_MYCM, KC_WHOM, SH_SPOTIFY, KC_CALC, SH_TELEGRAM, SH_STEAM, SH_SLACK, SH_VSCODE, _______, _______, _______, _______, _______,_______,
+        _______, KC_MYCM, KC_WHOM, SH_SPOTIFY, KC_CALC, SH_QBIT, SH_STEAM, SH_SLACK, SH_VSCODE, _______, _______, _______, _______, _______,_______,
         _______, RGB_TOG, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, RGB_VAI, _______, _______, _______, _______, _______, _______, _______, _______, DF(_QWERTY), DF(_COLEMAKDH), QK_BOOT, _______,
         _______, _______, RGB_VAD, _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, KC_NUM,           FN_TURBO_MOUSE,   _______,
@@ -75,14 +76,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     MO(_NUMPAD), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL,            _______,
         _______, KC_LGUI, KC_LALT, OSM(MOD_LSFT),  KC_LCTL, KC_ENT,   KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_ENT,  _______, _______, _______,         _______,
         _______, CTRL_Z, CTRL_W, CTRL_S_TAB, CTRL_TAB, _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______, _______,                  _______,
-        _______, CTRL_A_DEL, KC_ESC , CTRL_S_T, FN_RCLICK, _______, FN_N, KC_MINS, KC_EQL,  _______, KC_DEL,                    _______, _______, _______,
+        _______, CTRL_A_DEL, KC_ESC , CTRL_S_T, FN_RCLICK, FN_REDDIT_TAB, FN_N, KC_MINS, KC_EQL,  _______, KC_DEL,          _______, _______, _______,
         _______, _______, _______,                           _______,                           FN_LLOCK, _______, _______, _______, _______,  _______
     ),
 
     [_NUMPAD] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
-        _______, _______, _______, _______, _______, _______, KC_PMNS, KC_KP_7, KC_KP_8, KC_KP_9, KC_PSLS, _______, _______, _______,          _______,
+        _______, KC_LGUI, KC_LALT, OSM(MOD_LSFT),  KC_LCTL,   _______, KC_PMNS, KC_KP_7, KC_KP_8, KC_KP_9, KC_PSLS, _______, _______, _______,          _______,
         _______, _______, _______, _______, _______, _______, KC_PPLS, KC_KP_4, KC_KP_5, KC_KP_6, KC_PAST, KC_BSPC, KC_PENT,                   _______,
         _______, _______, _______, _______, _______, _______, KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3, KC_PDOT,                   _______, _______, _______,
         _______, _______, _______,                            _______,                           FN_LLOCK, _______, _______, _______, _______, _______
@@ -131,15 +132,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code16(C(KC_Z));
             }
             break;
+        case CTRL_A_DEL:
+            if (record->event.pressed) {
+                tap_code16(C(KC_A));
+                tap_code16(KC_DEL);
+            }
+            break;
+
         case FN_REDDIT_S:
             if (record->event.pressed) {
                 SEND_STRING("site:reddit.com");
             }
             break;
-        case CTRL_A_DEL:
+        case FN_REDDIT_TAB:
             if (record->event.pressed) {
-                tap_code16(C(KC_A));
-                tap_code16(KC_DEL);
+                tap_code16(S(KC_C));
+                tap_code16(C(S(KC_TAB)));
             }
             break;
         case FN_RCLICK:
@@ -152,6 +160,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_KP_1) SS_TAP(X_KP_6) SS_TAP(X_KP_4) SS_UP(X_LALT));
             }
             break;
+
         case SH_SPOTIFY:
             if (record->event.pressed) {
                 SEND_STRING(SS_TAP(X_LGUI) SS_DELAY(100) "SPOTIFY" SS_DELAY(100) SS_TAP(X_ENT));
@@ -172,9 +181,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 SEND_STRING(SS_TAP(X_LGUI) SS_DELAY(100) "steam" SS_DELAY(100) SS_TAP(X_ENT));
             }
             break;
-        case SH_TELEGRAM:
+        case SH_QBIT:
             if (record->event.pressed) {
-                SEND_STRING(SS_TAP(X_LGUI) SS_DELAY(100) "telegram" SS_DELAY(100) SS_TAP(X_ENT));
+                SEND_STRING(SS_TAP(X_LGUI) SS_DELAY(100) "qbittorrent" SS_DELAY(100) SS_TAP(X_ENT));
             }
             break;
     }
