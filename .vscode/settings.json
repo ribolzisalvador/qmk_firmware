@@ -9,6 +9,13 @@
         "**/*.bin": true,
         "**/*.uf2": true
     },
+    "[markdown]": {
+        "editor.trimAutoWhitespace": false,
+        "files.trimTrailingWhitespace": false
+    },
+    "[json]": {
+        "editor.formatOnSave": false
+    },
     "files.associations": {
         "*.h": "c",
         "*.c": "c",
@@ -20,15 +27,20 @@
         "utility": "c",
         "ranges": "c"
     },
-    "[markdown]": {
-        "editor.trimAutoWhitespace": false,
-        "files.trimTrailingWhitespace": false
+    "terminal.integrated.profiles.windows": {
+        "QMK_MSYS": {
+            "path": "C:/Program Files/QMK_MSYS/usr/bin/bash.exe",
+            "env": {
+                "MSYSTEM": "MINGW64",
+                "CHERE_INVOKING": "1"
+            },
+            "args": [
+                "--login"
+            ]
+        }
     },
-    "python.formatting.provider": "yapf",
-    "[json]": {
-        "editor.formatOnSave": false
-    },
-    "clangd.arguments": [
-        "--header-insertion=never"
-    ]
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.defaultProfile.windows": "QMK_MSYS",
+    "C_Cpp.dimInactiveRegions": false,
+    "C_Cpp.default.compilerPath": ""
 }
